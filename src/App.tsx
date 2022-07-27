@@ -11,17 +11,29 @@ import Header from "./components/Header";
 import initialEmails from "./data/emails";
 
 import "./App.css";
-// type Email = {
-//   id: number;
-//   sender: string;
-//   title: string;
-//   starred: boolean;
-//   read: boolean;
-// };
+type Email = {
+  id: number;
+  sender: string;
+  title: string;
+  starred: boolean;
+  read: boolean;
+};
 function App() {
   // Use initialEmails for state
 
   const [emails, setEmails] = useState(initialEmails);
+  
+  function toggleReadEmail(email: Email) {
+
+    const initialEmailsCopy = structuredClone(initialEmails);
+
+
+    const targetEmail = initialEmailsCopy.find(
+      (target) => target.id === email.id
+    );
+    targetEmail.read = !targetEmail.read;
+    setEmails(initialEmailsCopy);
+  }
 
   return (
     <div className="app">
@@ -58,13 +70,22 @@ function App() {
         {/* Render a list of emails here */}
         <ul>
           {emails.map((email) => (
-            <li key={email.id}>
-              <div className="email-item">
-                <div className="email-item-header">
-                  <div className="sender">{email.sender}</div>
-                  <div className="title">{email.title}</div>
-                </div>
-              </div>
+            <li className={email.read ? "email read" : "email"}>
+              {/* <div className="email-item">
+                <div className="email-item-header"> */}
+              <input
+                type="checkbox"
+                className="read-checkbox"
+                checked={email.read}
+                onChange={() => toggleReadEmail(email)}
+              />
+
+              <input type="checkbox" className="starred" />
+              <div className="sender">{email.sender}</div>
+              <div className="title">{email.title}</div>
+
+              {/* </div> */}
+              {/* </div> */}
             </li>
           ))}
         </ul>
