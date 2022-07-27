@@ -24,16 +24,16 @@ function App() {
   const [emails, setEmails] = useState(initialEmails);
 
   function toggleRead(email: Email) {
-    const emailsCopy = structuredClone(emails);
+    const emailsCopy: Email[] = structuredClone(emails);
 
-    const targetEmail = emailsCopy.find((target) => target.id === email.id);
+    const targetEmail = emailsCopy.find(target => target.id === email.id)!;
     targetEmail.read = !targetEmail.read;
     setEmails(emailsCopy);
   }
   function toggleStarred(email: Email) {
-    const emailsCopy = structuredClone(emails);
+    const emailsCopy: Email[] = structuredClone(emails);
 
-    const targetEmail = emailsCopy.find((target) => target.id === email.id);
+    const targetEmail = emailsCopy.find(target => target.id === email.id)!;
     targetEmail.starred = !targetEmail.starred;
     setEmails(emailsCopy);
   }
