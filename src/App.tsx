@@ -1,19 +1,27 @@
+// Don't break the code down into components; work in App.tsx only
+// - Set state using useState and initialEmails
+// - Render a list of emails from state so it looks similar to the screenshot
+// - Create a toggleRead function that updates the target email's read property in state, when a user clicks on the checkbox
+// - Create a toggleStar function that updates the target email's starred property in state, when a user clicks on the star
+// - Make sure these changes take effect in the UI
+
 import { useState } from "react";
 import Header from "./components/Header";
 
 import initialEmails from "./data/emails";
 
 import "./App.css";
-
+// type Email = {
+//   id: number;
+//   sender: string;
+//   title: string;
+//   starred: boolean;
+//   read: boolean;
+// };
 function App() {
   // Use initialEmails for state
-  // const [todos, setTodos] = useState([
-  //   { title: 'Buy milk', completed: true },
-  //   { title: 'Cook dinner', completed: false },
-  //   { title: 'Learn React', completed: false }
-  // ])
 
-  console.log(initialEmails);
+  const [emails, setEmails] = useState(initialEmails);
 
   return (
     <div className="app">
@@ -46,7 +54,21 @@ function App() {
           </li>
         </ul>
       </nav>
-      <main className="emails">{/* Render a list of emails here */}</main>
+      <main className="emails">
+        {/* Render a list of emails here */}
+        <ul>
+          {emails.map((email) => (
+            <li key={email.id}>
+              <div className="email-item">
+                <div className="email-item-header">
+                  <div className="sender">{email.sender}</div>
+                  <div className="title">{email.title}</div>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+      </main>
     </div>
   );
 }
