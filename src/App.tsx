@@ -22,11 +22,9 @@ function App() {
   // Use initialEmails for state
 
   const [emails, setEmails] = useState(initialEmails);
-  
+
   function toggleReadEmail(email: Email) {
-
     const initialEmailsCopy = structuredClone(initialEmails);
-
 
     const targetEmail = initialEmailsCopy.find(
       (target) => target.id === email.id
@@ -70,19 +68,23 @@ function App() {
         {/* Render a list of emails here */}
         <ul>
           {emails.map((email) => (
-            <li className={email.read ? "email read" : "email"}>
+            <li className={email.read ? "email read" : "email unread"}>
               {/* <div className="email-item">
                 <div className="email-item-header"> */}
               <input
                 type="checkbox"
-                className="read-checkbox"
+                className=".read-checkbox"
                 checked={email.read}
-                onChange={() => toggleReadEmail(email)}
+                // onChange={() => toggleReadEmail(email)}
               />
 
-              <input type="checkbox" className="starred" />
-              <div className="sender">{email.sender}</div>
-              <div className="title">{email.title}</div>
+              <input
+                type="checkbox"
+                className="star-checkbox"
+                checked={email.starred}
+              />
+              <span className="sender">{email.sender}</span>
+              <span className="title">{email.title}</span>
 
               {/* </div> */}
               {/* </div> */}
